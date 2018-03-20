@@ -51,6 +51,120 @@ struct StartResp {
     tail_type: String,
 }
 
+/**
+ * Struct with Deserialization from this Json:
+ * {
+ *  "food": {
+ *    "data": [
+ *      {
+ *        "object": "point",
+ *        "x": 0,
+ *        "y": 9
+ *      }
+ *    ],
+ *    "object": "list"
+ *  },
+ *  "height": 20,
+ *  "id": 1,
+ *  "object": "world",
+ *  "snakes": {
+ *    "data": [
+ *      {
+ *        "body": {
+ *          "data": [
+ *            {
+ *              "object": "point",
+ *              "x": 13,
+ *              "y": 19
+ *            },
+ *            {
+ *              "object": "point",
+ *              "x": 13,
+ *              "y": 19
+ *            },
+ *            {
+ *              "object": "point",
+ *              "x": 13,
+ *              "y": 19
+ *            }
+ *          ],
+ *          "object": "list"
+ *        },
+ *        "health": 100,
+ *        "id": "58a0142f-4cd7-4d35-9b17-815ec8ff8e70",
+ *        "length": 3,
+ *        "name": "Sonic Snake",
+ *        "object": "snake",
+ *        "taunt": "Gotta go fast"
+ *      },
+ *      {
+ *        "body": {
+ *          "data": [
+ *            {
+ *              "object": "point",
+ *              "x": 8,
+ *              "y": 15
+ *            },
+ *            {
+ *              "object": "point",
+ *              "x": 8,
+ *              "y": 15
+ *            },
+ *            {
+ *              "object": "point",
+ *              "x": 8,
+ *              "y": 15
+ *            }
+ *          ],
+ *          "object": "list"
+ *        },
+ *        "health": 100,
+ *        "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
+ *        "length": 3,
+ *        "name": "Typescript Snake",
+ *        "object": "snake",
+ *        "taunt": ""
+ *      }
+ *    ],
+ *    "object": "list"
+ *  },
+ *  "turn": 0,
+ *  "width": 20,
+ *  "you": {
+ *    "body": {
+ *      "data": [
+ *        {
+ *          "object": "point",
+ *          "x": 8,
+ *          "y": 15
+ *        },
+ *        {
+ *          "object": "point",
+ *          "x": 8,
+ *          "y": 15
+ *        },
+ *        {
+ *          "object": "point",
+ *          "x": 8,
+ *          "y": 15
+ *        }
+ *      ],
+ *      "object": "list"
+ *    },
+ *    "health": 100,
+ *    "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
+ *    "length": 3,
+ *    "name": "Typescript Snake",
+ *    "object": "snake",
+ *    "taunt": ""
+ *  }
+ * }
+ */
+#[derive(Derserialize)]
+struct MoveReq {
+    field: Type
+}
+
 #[derive(Serialize, Deserialize)]
 struct MoveResp {
     movement: String,
@@ -85,7 +199,7 @@ fn index() -> &'static str {
  * }
  */
 #[post("/start", data="<StartReq>")]
-fn start(StartReq: Json<StartReq>) -> Json<Value> {
+fn start(start_req: Json<StartReq>) -> Json<Value> {
     Json(json!(StartResp {
         color: String::from("#d87b1e"),
         secondary_color: String::from("#13a341"),
@@ -96,7 +210,7 @@ fn start(StartReq: Json<StartReq>) -> Json<Value> {
     }))
 }
 
-#[post("/move")]
+#[post("/move", data="<MoveReq>")]
 fn movement() -> Json<Value> {
     Json(json!(MoveResp {
         movement: String::from("up"),
