@@ -36,6 +36,12 @@ struct StartResp {
     tail_type: String,
 }
 
+#[derive(Serialize, Deserialize)]
+struct MoveResp {
+    movement: String,
+    taunt: String,
+}
+
 // --- HTTP HANDLERS ---
 // ---------------------
 
@@ -74,12 +80,15 @@ fn start() -> Json<Value> {
         tail_type: String::from("pixel"),
     }))
 }
-/*
+
 #[post("/move")]
-fn move() -> Json<Value> {
-    Json(json!({move: "up"}))
+fn movement() -> Json<Value> {
+    Json(json!(MoveResp {
+        movement: String::from("up"),
+        taunt: String::from("Hello"),
+    }))
 }
-*/
+
 /*
 #[post("/end")]
 fn end() {
@@ -88,5 +97,5 @@ fn end() {
 */
 
 fn main() {
-    rocket::ignite().mount("/", routes![index, start]).launch();
+    rocket::ignite().mount("/", routes![index, start, movement]).launch();
 }
