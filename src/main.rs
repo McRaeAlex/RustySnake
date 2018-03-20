@@ -16,6 +16,21 @@ use serde_json::Value;
 // ------------------
 
 /**
+ * Stuct with deserialize from this json
+ * {
+ *  "game_id": 1,
+ *  "width": 20,
+ *  "height": 20
+ * }
+ */
+#[derive(Deserialize)]
+struct StartReq {
+    game_id: i32,
+    width: i32,
+    height: i32,
+}
+
+/**
  * Struct with serialize into json with this format
  * {
  *   "color": "#FF0000",
@@ -26,7 +41,7 @@ use serde_json::Value;
  *   "tail_type": "pixel"
  * }
  */
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize)]
 struct StartResp {
     color: String,
     secondary_color: String,
@@ -69,8 +84,8 @@ fn index() -> &'static str {
  *   "tail_type": "pixel"
  * }
  */
-#[post("/start")]
-fn start() -> Json<Value> {
+#[post("/start", data="<StartReq>")]
+fn start(StartReq: Json<StartReq>) -> Json<Value> {
     Json(json!(StartResp {
         color: String::from("#d87b1e"),
         secondary_color: String::from("#13a341"),
