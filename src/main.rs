@@ -160,16 +160,61 @@ struct StartResp {
  *  }
  * }
  */
-#[derive(Derserialize)]
+#[derive(Deserialize)]
 struct MoveReq {
-    field: Type
+    food: Points,
+    height: i64,
+    id: i64,
+    object: String,
+    snakes: Snakes,
+    turn: i64,
+    width: i64,
+    you: Snake,
 }
 
-#[derive(Serialize, Deserialize)]
+/**
+ * This struct stores a list of points
+ * Points can be food or a body part
+ */
+#[derive(Deserialize)]
+struct Points {
+    data: Vec<Point>,
+    object: String,
+}
+
+#[derive(Deserialize)]
+struct Snakes {
+    data: Vec<Snake>,
+    object: String,
+}
+
+/**
+ * This struct is just a point on the board
+ */
+#[derive(Deserialize)]
+struct Point {
+    object: String,
+    x: i64,
+    y: i64,
+}
+
+#[derive(Deserialize)]
+struct Snake {
+  body: Points,
+  health: i64,
+  id: String,
+  length: i64,
+  name: String,
+  object: String,
+  taunt: String,
+}
+
+#[derive(Serialize)]
 struct MoveResp {
     movement: String,
     taunt: String,
 }
+
 
 /**
  * Deserializes json into struct
@@ -191,9 +236,28 @@ struct MoveResp {
  */
 #[derive(Deserialize)]
 struct EndReq {
-    game_id: i32,
-    winners: [String: 1],
-    //dead_snakes:
+    game_id: i64,
+    winners: Vec<String>,
+    dead_snakes: DeadSnakes,
+}
+
+#[derive(Deserialize)]
+struct DeadSnakes {
+    object: String,
+    data: Vec<DeadSnake>,
+}
+
+#[derive(Deserialize)]
+struct DeadSnake {
+    id: String,
+    length: i64,
+    death: Death,
+}
+
+#[derive(Deserialize)]
+struct Death {
+  turn: i64,
+  causes: Vec<String>,
 }
 
 // --- HTTP HANDLERS ---
@@ -224,7 +288,7 @@ fn index() -> &'static str {
  * }
  */
 #[post("/start", data="<StartReq>")]
-fn start(start_req: Json<StartReq>) -> Json<Value> {
+fn start(StartReq: Json<StartReq>) -> Json<Value> {
     Json(json!(StartResp {
         color: String::from("#d87b1e"),
         secondary_color: String::from("#13a341"),
@@ -236,7 +300,23 @@ fn start(start_req: Json<StartReq>) -> Json<Value> {
 }
 
 #[post("/move", data="<MoveReq>")]
-fn movement() -> Json<Value> {
+fn movement(MoveReq: Json<MoveReq>) -> Json<Value> {
+    println!("-------------------------------------");
+    println!("TESTS");
+    println!("-------------------------------------");
+    println!("The game ID is: {}", MoveReq.id);
+    println!("The width is: {} and height is: {}", MoveReq.width, MoveReq.height);
+    println!("It is turn: {}", MoveReq.turn);
+    println!("-------------------------------------");
+    println!("INFORMATION ABOUT YOUR SNAKE");
+    println!("-------------------------------------");
+    println!("Name: {}", MoveReq.you.name);
+    println!("Length: {}", MoveReq.you.length);
+    println!("Health: {}", MoveReq.you.health);
+    println!("Taunt: {}", MoveReq.you.taunt);
+    println!("-------------------------------------");
+    println!("END TESTS");
+    println!("-------------------------------------");
     Json(json!(MoveResp {
         movement: String::from("up"),
         taunt: String::from("Hello"),
@@ -245,10 +325,9 @@ fn movement() -> Json<Value> {
 
 
 #[post("/end", data="<EndReq>")]
-fn end(end_req: Json<EndReq>) {
-
+fn end(EndReq: Json<EndReq>) {
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index, start, movement]).launch();
+    rocket::ignite().mount("/", routes![index, start, movement, end]).launch();
 }
