@@ -74,13 +74,13 @@ fn start() -> Json<Value> {
         tail_type: String::from("pixel"),
     }))
 }
-
-
+/*
 #[post("/move")]
 fn move() -> Json<Value> {
     Json(json!({move: "up"}))
 }
-
+*/
+/*
 #[post("/end")]
 fn end() {
 
