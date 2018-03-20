@@ -12,7 +12,7 @@ In order to use and develope Rusty your going to need a few things:
 
 1. [Rust](https://www.rust-lang.org/en-US/install.html)
 2. [A very basic understanding of the web](https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
-3. [A understanding of the game this bot is trying to play](https://github.com/sendwithus/battlesnake-server/)
+3. [A understanding of the game this bot is trying to play](https://github.com/sendwithus/battlesnake-server/#readme)
 
 ### Installing
 
