@@ -171,6 +171,31 @@ struct MoveResp {
     taunt: String,
 }
 
+/**
+ * Deserializes json into struct
+ * {
+ *   "game_id": 10,
+ *   "winners": [ "a46b558b-f31b-418f-bb07-6017dd91f653" ],
+ *   "dead_snakes": {
+ *     "object": "list",
+ *     "data": [{
+ *       "id": "4a35fd1c-434b-431b-839c-edf958d67e9a",
+ *       "length": 3,
+ *       "death": {
+ *         "turn": 4,
+ *         "causes": ["self collision"]
+ *       }
+ *     }]
+ *   }
+ * } 
+ */
+#[derive(Deserialize)]
+struct EndReq {
+    game_id: i32,
+    winners: [String: 1],
+    //dead_snakes:
+}
+
 // --- HTTP HANDLERS ---
 // ---------------------
 
@@ -218,12 +243,11 @@ fn movement() -> Json<Value> {
     }))
 }
 
-/*
-#[post("/end")]
-fn end() {
+
+#[post("/end", data="<EndReq>")]
+fn end(end_req: Json<EndReq>) {
 
 }
-*/
 
 fn main() {
     rocket::ignite().mount("/", routes![index, start, movement]).launch();
