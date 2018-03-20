@@ -1,6 +1,6 @@
 # Rusty Snake
 
-Rusty Snake is a battle snake built with Rocket, a rust web developement framework. Rusty snakes strategy isn't clear yet but it will likely have multiple iterations with different strategies. Rusty purpose is to bring enjoyment to me and win battlesnake competitions. Rusty also helps me learn rust.
+Rusty is a battle snake built with Rocket, a rust web developement framework. Rusty's strategy isn't clear yet but it will likely have multiple iterations with different strategies. Rusty purpose is to bring enjoyment to me and win battlesnake competitions. Rusty also helps me learn rust.
 
 ## Getting Started
 
