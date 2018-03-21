@@ -52,26 +52,6 @@ rustup default nightly
 ```
 to switch your default toolchain to nightly
 
-## Running the tests (TODO)
-
-Explain how to run the automated tests for this system ()
-
-### Break down into end to end tests ()
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests ()
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment (TODO)
 
 Add additional notes about how to deploy this on a live system
@@ -97,3 +77,4 @@ This project does not have a license at this time
 ## Acknowledgments
 
 * Rust for confusing me
+* SendWithUs for making the competition
