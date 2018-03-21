@@ -5,12 +5,14 @@
 // --------------------------
 
 extern crate rocket;
-#[macro_use] extern crate serde_derive;
-extern crate serde;
-#[macro_use] extern crate serde_json;
 extern crate rocket_contrib;
+extern crate serde;
+#[macro_use] extern crate serde_derive;
+#[macro_use] extern crate serde_json;
+
 use rocket_contrib::Json;
 use serde_json::Value;
+use serde::ser::{Serialize, Serializer, SerializeStruct};
 
 // --- Structures ---
 // ------------------
@@ -209,10 +211,29 @@ struct Snake {
   taunt: String,
 }
 
-#[derive(Serialize)]
+/**
+ * This is the struct that turns into the json to send back to the server
+ * move is a keyword in rust so movement is used but the serializer will 
+ * convert it into the correct format
+ */
 struct MoveResp {
     movement: String,
     taunt: String,
+}
+
+/**
+ * This is the method to serialize the struct
+ */
+impl Serialize for MoveResp {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where S: Serializer
+    {
+        // 3 is the number of fields in the struct.
+        let mut state = serializer.serialize_struct("MoveResp", 2)?;
+        state.serialize_field("move", &self.movement)?;
+        state.serialize_field("taunt", &self.taunt)?;
+        state.end()
+    }
 }
 
 
@@ -241,12 +262,18 @@ struct EndReq {
     dead_snakes: DeadSnakes,
 }
 
+/**
+ * This is just a list of dead snakes
+ */
 #[derive(Deserialize)]
 struct DeadSnakes {
     object: String,
     data: Vec<DeadSnake>,
 }
 
+/**
+ * Dead snakes aren't the same struct as normal snakes.
+ */
 #[derive(Deserialize)]
 struct DeadSnake {
     id: String,
@@ -254,6 +281,11 @@ struct DeadSnake {
     death: Death,
 }
 
+/**
+ * Death consists of the turn number and a list of strings that are the causes
+ * causes of death could be: body collison, head collison, self collison,
+ * starvation, and wall collison.
+ */
 #[derive(Deserialize)]
 struct Death {
   turn: i64,
