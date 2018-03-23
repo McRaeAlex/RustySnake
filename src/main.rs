@@ -1,9 +1,3 @@
-/**
- * Author: Alexander McRae
- * License: None at this time
- * If you are going to use this people just reference me
- */
-
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
 
