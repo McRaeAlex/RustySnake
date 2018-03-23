@@ -2,6 +2,15 @@
 
 Rusty is a battle snake built with Rocket, a rust web developement framework. Rusty's strategy isn't clear yet but it will likely have multiple iterations with different strategies. Rusty purpose is to bring enjoyment to me and win battlesnake competitions. Rusty also helps me learn rust.
 
+## Note:
+
+If you just want to use this due to the structures and template I have created fork this repo and then start working from a previous commit:
+
+```
+git checkout 8ded17516143bc25c89c284d91cf997593d82780
+```
+Then just make that as your head, this will avoid the troubles of having to deal with code I am building for my Snake.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -52,6 +61,26 @@ rustup default nightly
 ```
 to switch your default toolchain to nightly
 
+## Running the tests (TODO)
+
+Explain how to run the automated tests for this system ()
+
+### Break down into end to end tests ()
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests ()
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
 ## Deployment (TODO)
 
 Add additional notes about how to deploy this on a live system
@@ -77,4 +106,3 @@ This project does not have a license at this time
 ## Acknowledgments
 
 * Rust for confusing me
-* SendWithUs for making the competition
