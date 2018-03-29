@@ -349,15 +349,37 @@ fn movement(MoveReq: Json<MoveReq>) -> Json<Value> {
     println!("-------------------------------------");
     println!("END TESTS");
     println!("-------------------------------------");
-    Json(json!(MoveResp {
-        movement: String::from("up"),
-        taunt: String::from("Hello"),
-    }))
+    let Move = astar()
+    Json(json!(Move))
 }
 
 
 #[post("/end", data="<EndReq>")]
 fn end(EndReq: Json<EndReq>) {
+}
+
+// --- Logic ---
+// -------------
+
+/*
+ * General strategy:
+ * if canWin() {
+ *     doWin();
+ * }
+ */
+fn Logic(req: MoveReq) -> MoveResp {
+    unimplemented!();
+}
+
+/*
+ * Given a point what is the fastest path to that point without dying
+ */
+fn a_star(x:i64, y:i64) -> MoveResp {
+    unimplemented!();
+    MoveResp {
+        movement: "up",
+        taunt: "UPPPP",
+    }
 }
 
 fn main() {
