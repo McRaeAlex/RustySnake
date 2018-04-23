@@ -349,8 +349,11 @@ fn movement(MoveReq: Json<MoveReq>) -> Json<Value> {
     println!("-------------------------------------");
     println!("END TESTS");
     println!("-------------------------------------");
-    let Move = astar()
-    Json(json!(Move))
+    let Move = Logic(MoveReq);
+    Json(json!(MoveResp {
+        movement: String::from("up"),
+        taunt: String::from("Hello"),
+    }))
 }
 
 
@@ -362,23 +365,45 @@ fn end(EndReq: Json<EndReq>) {
 // -------------
 
 /*
+ * Possible strategies:
+ * 1. Chase tail then when under a certain health run for food
+ * 2. Surround food, protect it and then the last minute take it quickly
+ * 3. Balls to the wall attack everything untill under a certain heath then food
+ */
+
+/*
  * General strategy:
  * if canWin() {
  *     doWin();
  * }
+ * Will be going with the surround and then take at the last moment strategy
  */
-fn Logic(req: MoveReq) -> MoveResp {
-    unimplemented!();
+fn Logic(req: Json<MoveReq>) -> MoveResp {
+    // if health is under some threshold go for food
+    if req.you.health < 10 {
+        // find closest food
+        // astar to closest food
+        unimplemented!();
+    } else {
+        // chase tail
+        let tail = req.you.body.data.last();
+        match tail {
+            Some(val) => a_star(val.x, val.y),
+            None => MoveResp{
+                movement: "up".to_string(),
+                taunt: "I panicked".to_string(),
+            },
+        }
+    }
 }
 
 /*
  * Given a point what is the fastest path to that point without dying
  */
 fn a_star(x:i64, y:i64) -> MoveResp {
-    unimplemented!();
     MoveResp {
-        movement: "up",
-        taunt: "UPPPP",
+        movement: "up".to_string(),
+        taunt: "UPPPP".to_string(),
     }
 }
 

@@ -1,6 +1,6 @@
 # To Do:
 ## Basics
-- [ ] Figure out how to bypass 'move' keyword
+- [x] Figure out how to bypass 'move' keyword
 - [x] Take in json posts for move and end
 - [x] Get /end to send http status ok 200 back
 - [x] Figure out how to deserialize MoveReq json
