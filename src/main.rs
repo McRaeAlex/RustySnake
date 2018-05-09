@@ -321,6 +321,7 @@ fn index() -> io::Result<NamedFile> {
  *   "tail_type": "pixel"
  * }
  */
+#[allow(non_snake_case)]
 #[post("/start", data="<StartReq>")]
 fn start(StartReq: Json<StartReq>) -> Json<Value> {
     Json(json!(StartResp {
@@ -333,6 +334,7 @@ fn start(StartReq: Json<StartReq>) -> Json<Value> {
     }))
 }
 
+#[allow(non_snake_case)]
 #[post("/move", data="<MoveReq>")]
 fn movement(MoveReq: Json<MoveReq>) -> Json<Value> {
     println!("-------------------------------------");
@@ -351,14 +353,13 @@ fn movement(MoveReq: Json<MoveReq>) -> Json<Value> {
     println!("-------------------------------------");
     println!("END TESTS");
     println!("-------------------------------------");
-    let Move = Logic(MoveReq);
     Json(json!(MoveResp {
         movement: String::from("up"),
         taunt: String::from("Hello"),
     }))
 }
 
-
+#[allow(non_snake_case)]
 #[post("/end", data="<EndReq>")]
 fn end(EndReq: Json<EndReq>) {
 }
@@ -380,7 +381,8 @@ fn end(EndReq: Json<EndReq>) {
  * }
  * Will be going with the surround and then take at the last moment strategy
  */
-fn Logic(req: Json<MoveReq>) -> MoveResp {
+
+fn logic(req: Json<MoveReq>) -> MoveResp {
     // if health is under some threshold go for food
     if req.you.health < 10 {
         // find closest food
