@@ -13,6 +13,8 @@ extern crate serde;
 use rocket_contrib::Json;
 use serde_json::Value;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
+use rocket::response::NamedFile;
+use std::io;
 
 // --- Structures ---
 // ------------------
@@ -296,8 +298,8 @@ struct Death {
 // ---------------------
 
 #[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+fn index() -> io::Result<NamedFile> {
+    NamedFile::open("src/index.html")
 }
 
 /**
