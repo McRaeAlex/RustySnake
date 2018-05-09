@@ -2,6 +2,15 @@
 
 Rusty is a battle snake built with Rocket, a rust web developement framework. Rusty's strategy isn't clear yet but it will likely have multiple iterations with different strategies. Rusty purpose is to bring enjoyment to me and win battlesnake competitions. Rusty also helps me learn rust.
 
+## Note:
+
+If you just want to use this due to the structures and template I have created fork this repo and then start working from a previous commit:
+
+```
+git checkout 8ded17516143bc25c89c284d91cf997593d82780
+```
+Then just make that as your head, this will avoid the troubles of having to deal with code I am building for my Snake.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
