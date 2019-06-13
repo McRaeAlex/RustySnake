@@ -4,6 +4,7 @@
 extern crate rocket;
 
 mod requests;
+mod response;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -11,6 +12,6 @@ fn index() -> &'static str {
 }
 
 fn main() {
-    println!("Hello WOrld");
+    println!("Hello World");
     rocket::ignite().mount("/", routes![index]).launch();
 }
