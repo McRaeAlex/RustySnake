@@ -1,17 +1,25 @@
-use serde::{Deserialize};
+use serde::Deserialize;
 
-#[derive(Deserialize)]
-struct Point(i32, i32);
+#[derive(Deserialize, PartialEq, Eq, Debug)]
+struct Point {
+    x: i32,
+    y: i32,
+}
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Eq, Debug)]
 struct Turn {
-    game_id: String,
+    game: Game,
     turn: u32,
     board: Board,
     you: Snake,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Eq, Debug)]
+struct Game {
+    id: String,
+}
+
+#[derive(Deserialize, PartialEq, Eq, Debug)]
 struct Board {
     height: i32,
     width: i32,
@@ -19,7 +27,7 @@ struct Board {
     snakes: Vec<Snake>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Eq, Debug)]
 struct Snake {
     id: String,
     name: String,
@@ -32,7 +40,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn turn_deserialize()  {
+    fn turn_deserialize() {
         let turn1 = r#"{
             "game": {
                 "id": "game-id-string"
@@ -74,14 +82,38 @@ mod tests {
             }
         }"#;
 
+        let correct: Turn = Turn {
+            game: Game {
+                id: "game-id-string".to_string(),
+            },
+            turn: 4,
+            board: Board {
+                height: 15,
+                width: 15,
+                food: vec![Point { x: 1, y: 3 }],
+                snakes: vec![Snake {
+                    id: "snake-id-string".to_string(),
+                    name: "Sneky Snek".to_string(),
+                    health: 90,
+                    body: vec![Point { x: 1, y: 3 }],
+                }],
+            },
+            you: Snake {
+                id: "snake-id-string".to_string(),
+                name: "Sneky Snek".to_string(),
+                health: 90,
+                body: vec![Point { x: 1, y: 3 }],
+            },
+        };
+
         let result: serde_json::Result<Turn> = serde_json::from_str(turn1);
         match result {
             Err(e) => {
-                eprintln!("{}", e);
+                eprintln!("Returned value is Err: {}", e);
                 assert!(false);
-            },
+            }
             Ok(val) => {
-                return;
+                assert_eq!(correct, val);
             }
         }
     }
