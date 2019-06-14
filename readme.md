@@ -7,7 +7,7 @@ Rusty is a battle snake built with Rocket, a rust web developement framework. Ru
 If you just want to use this due to the structures and template I have created fork this repo and then start working from a previous commit:
 
 ```
-git checkout 8ded17516143bc25c89c284d91cf997593d82780
+git checkout template
 ```
 Then just make that as your head, this will avoid the troubles of having to deal with code I am building for my Snake.
 
@@ -61,24 +61,12 @@ rustup default nightly
 ```
 to switch your default toolchain to nightly
 
-## Running the tests (TODO)
+## Running the tests:
 
-Explain how to run the automated tests for this system ()
-
-### Break down into end to end tests ()
-
-Explain what these tests test and why
+Using the package manager bundled with rust run:
 
 ```
-Give an example
-```
-
-### And coding style tests ()
-
-Explain what these tests test and why
-
-```
-Give an example
+cargo test
 ```
 
 ## Deployment (TODO)
@@ -89,6 +77,7 @@ Add additional notes about how to deploy this on a live system
 
 * [Rust](https://www.rust-lang.org/en-US/install.html) - The programming language used
 * [Rocket](https://rocket.rs/) - The web framework used
+* [Serde](https://serde.rs) - Used to serialize and deserialize json
 
 
 ## Contributing
@@ -101,8 +90,4 @@ This is more of a personal project than anything. However if you would like to c
 
 ## License
 
-This project does not have a license at this time
-
-## Acknowledgments
-
-* Rust for confusing me
+MIT
