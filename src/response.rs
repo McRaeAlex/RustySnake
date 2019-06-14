@@ -1,7 +1,7 @@
 use serde::Serialize;
 
 #[derive(Serialize, PartialEq, Eq, Debug)]
-struct Start {
+pub struct Start {
     color: String,
     #[serde(rename = "headType")]
     head_type: HeadType,
@@ -12,7 +12,7 @@ struct Start {
 // TODO: Make all the head types
 #[derive(Serialize, PartialEq, Eq, Debug)]
 #[serde(rename_all = "lowercase")]
-enum HeadType {
+pub enum HeadType {
     Regular,
     Beluga,
     Bendr,
@@ -31,7 +31,7 @@ enum HeadType {
 // TODO: Make all the tail types
 #[derive(Serialize, PartialEq, Eq, Debug)]
 #[serde(rename_all = "lowercase")]
-enum TailType {
+pub enum TailType {
     Regular,
     #[serde(rename = "block-bum")]
     BlockBum,
@@ -51,14 +51,14 @@ enum TailType {
 }
 
 #[derive(Serialize, PartialEq, Eq, Debug)]
-struct Move {
+pub struct Move {
     #[serde(rename = "move")]
     movement: Movement,
 }
 
 #[derive(Serialize, PartialEq, Eq, Debug)]
 #[serde(rename_all(serialize = "lowercase"))]
-enum Movement {
+pub enum Movement {
     Right,
     Left,
     Up,

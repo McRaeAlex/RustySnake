@@ -13,6 +13,11 @@ fn index() -> &'static str {
     "Helo World"
 }
 
+#[get("/start", format = "json", data = "<Turn>")]
+fn start() -> response::Start {
+    
+}
+
 fn main() {
     println!("Hello World");
     rocket::ignite().mount("/", routes![index]).launch();

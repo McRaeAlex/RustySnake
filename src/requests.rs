@@ -1,13 +1,13 @@
 use serde::Deserialize;
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
-struct Point {
+pub struct Point {
     x: i32,
     y: i32,
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
-struct Turn {
+pub struct Turn {
     game: Game,
     turn: u32,
     board: Board,
@@ -15,12 +15,12 @@ struct Turn {
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
-struct Game {
+pub struct Game {
     id: String,
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
-struct Board {
+pub struct Board {
     height: i32,
     width: i32,
     food: Vec<Point>,
@@ -28,7 +28,7 @@ struct Board {
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
-struct Snake {
+pub struct Snake {
     id: String,
     name: String,
     health: i32,
