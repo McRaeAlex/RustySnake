@@ -105,7 +105,7 @@ mod tests {
             Err(e) => {
                 eprintln!("Returned value is Err: {}", e);
                 assert!(false);
-            },
+            }
             Ok(val) => {
                 assert_eq!(correct_serialized_response, val);
             }

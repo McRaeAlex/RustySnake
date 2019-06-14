@@ -3,7 +3,9 @@
 #[macro_use]
 extern crate rocket;
 
+#[allow(dead_code)]
 mod requests;
+#[allow(dead_code)]
 mod response;
 
 #[get("/")]
