@@ -1,6 +1,6 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, PartialEq, Eq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 pub struct Start {
     color: String,
     #[serde(rename = "headType")]
@@ -20,7 +20,7 @@ impl Start {
 }
 
 // TODO: Make all the head types
-#[derive(Serialize, PartialEq, Eq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 #[serde(rename_all = "lowercase")]
 pub enum HeadType {
     Regular,
@@ -39,7 +39,7 @@ pub enum HeadType {
 }
 
 // TODO: Make all the tail types
-#[derive(Serialize, PartialEq, Eq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 #[serde(rename_all = "lowercase")]
 pub enum TailType {
     Regular,
@@ -60,7 +60,7 @@ pub enum TailType {
     SmallRattle,
 }
 
-#[derive(Serialize, PartialEq, Eq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 pub struct Move {
     #[serde(rename = "move")]
     movement: Movement,
@@ -72,8 +72,8 @@ impl Move {
     }
 }
 
-#[derive(Serialize, PartialEq, Eq, Debug)]
-#[serde(rename_all(serialize = "lowercase"))]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
+#[serde(rename_all(serialize = "lowercase", deserialize = "lowercase"))]
 pub enum Movement {
     Right,
     Left,
@@ -82,7 +82,7 @@ pub enum Movement {
 }
 
 #[cfg(test)]
-mod tests {
+mod test {
     use super::*;
 
     #[test]
@@ -126,6 +126,26 @@ mod tests {
                 assert_eq!(correct_serialized_response, val);
             }
         }
+    }
+
+    #[test]
+    fn deserialize_start() {
+        let string = "{\"color\":\"#ff00ff\",\"headType\":\"bendr\",\"tailType\":\"pixel\"}";
+
+        let deserialized_start = serde_json::from_str(&string).unwrap();
+        let correct_start = Start::new(String::from("#ff00ff"), HeadType::Bendr, TailType::Pixel);
+        assert_eq!(correct_start, deserialized_start);
+    }
+
+    #[test]
+    fn deserialize_move() {
+        let string = "{\"move\":\"right\"}";
+
+        let deserialized_move = serde_json::from_str(&string).unwrap();
+        let correct_move = Move {
+            movement: Movement::Right,
+        };
+        assert_eq!(correct_move, deserialized_move);
     }
 
 }

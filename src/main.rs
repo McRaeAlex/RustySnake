@@ -48,8 +48,7 @@ fn ping() -> &'static str {
 }
 
 fn rocket() -> rocket::Rocket {
-    rocket::ignite()
-        .mount("/", routes![index, start, movement, end, ping])
+    rocket::ignite().mount("/", routes![index, start, movement, end, ping])
 }
 
 fn main() {
