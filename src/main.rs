@@ -19,7 +19,7 @@ fn index() -> &'static str {
     "Helo World"
 }
 
-#[get("/start", format = "json", data = "<req>")]
+#[post("/start", format = "json", data = "<req>")]
 fn start(req: Json<requests::Turn>) -> Json<responses::Start> {
     Json(responses::Start::new(
         "#AA3E39".to_string(),
@@ -28,16 +28,26 @@ fn start(req: Json<requests::Turn>) -> Json<responses::Start> {
     ))
 }
 
-#[get("/move", format = "json", data = "<req>")]
+#[post("/move", format = "json", data = "<req>")]
 fn movement(req: Json<requests::Turn>) -> Json<responses::Move> {
-    let mut movement = responses::Move::new(responses::Movement::Right);
+    let movement = responses::Move::new(responses::Movement::Right);
     // Logic goes here
     Json(movement)
+}
+
+#[post("/end")]
+fn end() -> &'static str {
+    "Thanks for the game"
+}
+
+#[post("/ping")]
+fn ping() -> &'static str {
+    "Alive and well"
 }
 
 fn main() {
     println!("Hello World");
     rocket::ignite()
-        .mount("/", routes![index, start, movement])
+        .mount("/", routes![index, start, movement, end, ping])
         .launch();
 }
