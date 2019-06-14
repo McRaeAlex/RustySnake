@@ -9,6 +9,16 @@ pub struct Start {
     tail_type: TailType,
 }
 
+impl Start {
+    pub fn new(color: String, head_type: HeadType, tail_type: TailType) -> Start {
+        Start {
+            color,
+            head_type,
+            tail_type,
+        }
+    }
+}
+
 // TODO: Make all the head types
 #[derive(Serialize, PartialEq, Eq, Debug)]
 #[serde(rename_all = "lowercase")]
@@ -54,6 +64,12 @@ pub enum TailType {
 pub struct Move {
     #[serde(rename = "move")]
     movement: Movement,
+}
+
+impl Move {
+    pub fn new(movement: Movement) -> Move {
+        Move { movement }
+    }
 }
 
 #[derive(Serialize, PartialEq, Eq, Debug)]
