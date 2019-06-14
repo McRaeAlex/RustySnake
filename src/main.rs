@@ -14,23 +14,21 @@ extern crate rocket_contrib;
 // Uses
 use rocket_contrib::json::Json;
 
-
 #[get("/")]
 fn index() -> &'static str {
     "Helo World"
 }
 
-#[get("/start", format = "json", data="<req>")]
+#[get("/start", format = "json", data = "<req>")]
 fn start(req: Json<requests::Turn>) -> Json<responses::Start> {
     Json(responses::Start::new(
         "#AA3E39".to_string(),
         responses::HeadType::Pixel,
-        responses::TailType::Sharp
-        )
-    )
+        responses::TailType::Sharp,
+    ))
 }
 
-#[get("/", format = "json", data="<req>")]
+#[get("/move", format = "json", data = "<req>")]
 fn movement(req: Json<requests::Turn>) -> Json<responses::Move> {
     let mut movement = responses::Move::new(responses::Movement::Right);
     // Logic goes here
@@ -39,5 +37,7 @@ fn movement(req: Json<requests::Turn>) -> Json<responses::Move> {
 
 fn main() {
     println!("Hello World");
-    rocket::ignite().mount("/", routes![index, start, movement]).launch();
+    rocket::ignite()
+        .mount("/", routes![index, start, movement])
+        .launch();
 }
