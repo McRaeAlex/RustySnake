@@ -3,6 +3,7 @@ name = "rusty_snake"
 version = "0.1.0"
 authors = ["Alex McRae <alex@alexandermcrae.com>"]
 edition = "2018"
+lisence = "MIT"
 
 [dependencies]
 rocket = "0.4.1"

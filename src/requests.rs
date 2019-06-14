@@ -40,7 +40,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn turn_deserialize() {
+    fn deserialize_turn() {
         let turn1 = r#"{
             "game": {
                 "id": "game-id-string"
