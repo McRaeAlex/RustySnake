@@ -5,6 +5,8 @@
 mod requests;
 #[allow(dead_code)]
 mod responses;
+#[cfg(test)]
+mod test;
 
 // External crates
 #[macro_use]
@@ -45,9 +47,12 @@ fn ping() -> &'static str {
     "Alive and well"
 }
 
-fn main() {
-    println!("Hello World");
+fn rocket() -> rocket::Rocket {
     rocket::ignite()
         .mount("/", routes![index, start, movement, end, ping])
-        .launch();
+}
+
+fn main() {
+    println!("Hello World");
+    rocket().launch();
 }
