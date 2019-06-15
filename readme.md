@@ -1,15 +1,14 @@
 # Rusty Snake
 
-Rusty is a battle snake built with Rocket, a rust web developement framework. Rusty's strategy isn't clear yet but it will likely have multiple iterations with different strategies. Rusty purpose is to bring enjoyment to me and win battlesnake competitions. Rusty also helps me learn rust.
+Rusty is a battle snake built with Rocket, a rust web developement framework.
 
 ## Note:
 
-If you just want to use this due to the structures and template I have created fork this repo and then start working from a previous commit:
+If you just want to use this as the starter snake run this command in the directory.
 
 ```
 git checkout template
 ```
-Then just make that as your head, this will avoid the troubles of having to deal with code I am building for my Snake.
 
 ## Getting Started
 
@@ -35,9 +34,7 @@ Then
 
 ```
 cd RustySnake
-```
-and finally
-```
+git checkout template
 cargo run
 ```
 You should see something like this
@@ -60,6 +57,20 @@ if you don't and it gives you errors saying missing features or something about 
 rustup default nightly
 ```
 to switch your default toolchain to nightly
+
+to install nightly
+
+```
+rustup install nightly
+```
+
+To push it to your own repo
+
+```
+git push -u <your repo>
+```
+
+And your done!
 
 ## Running the tests:
 
@@ -90,4 +101,24 @@ This is more of a personal project than anything. However if you would like to c
 
 ## License
 
-MIT
+MIT License
+
+Copyright (c) 2019 Alexander McRae
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
