@@ -2,6 +2,8 @@
 
 Rusty is a battle snake built with Rocket, a rust web developement framework.
 
+The project was recently updated with version 1.0 of battlesnake.
+
 ## Note:
 
 If you just want to use this as the starter snake run this command in the directory.
