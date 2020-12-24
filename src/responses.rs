@@ -3,10 +3,15 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Debug)]
 pub struct Info {
     pub apiversion: String,
+    #[serde(skip_serializing_if = "Option::is_none")]    
     pub author: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub color: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub head: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tail: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
@@ -74,11 +79,13 @@ pub enum TailType {
 pub struct Move {
     #[serde(rename = "move")]
     movement: Movement,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    shout: Option<String>,
 }
 
 impl Move {
     pub fn new(movement: Movement) -> Move {
-        Move { movement }
+        Move { movement , shout: None }
     }
 }
 
@@ -123,6 +130,7 @@ mod test {
     fn serialize_move() {
         let response = Move {
             movement: Movement::Right,
+            shout: None
         };
 
         let correct_serialized_response = "{\"move\":\"right\"}";
@@ -154,6 +162,7 @@ mod test {
         let deserialized_move = serde_json::from_str(&string).unwrap();
         let correct_move = Move {
             movement: Movement::Right,
+            shout: None,
         };
         assert_eq!(correct_move, deserialized_move);
     }
