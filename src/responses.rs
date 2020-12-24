@@ -1,5 +1,15 @@
 use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Debug)]
+pub struct Info {
+    apiversion: String,
+    author: Option<String>,
+    color: Option<String>,
+    head: Option<String>,
+    tail: Option<String>,
+    version: Option<String>
+}
+
 #[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 pub struct Start {
     color: String,

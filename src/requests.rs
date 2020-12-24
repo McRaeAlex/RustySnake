@@ -17,6 +17,7 @@ pub struct Turn {
 #[derive(Deserialize, PartialEq, Eq, Debug)]
 pub struct Game {
     id: String,
+    timeout: i32,
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
@@ -25,6 +26,7 @@ pub struct Board {
     width: i32,
     food: Vec<Point>,
     snakes: Vec<Snake>,
+    hazards: Vec<Point>,
 }
 
 #[derive(Deserialize, PartialEq, Eq, Debug)]
@@ -33,6 +35,11 @@ pub struct Snake {
     name: String,
     health: i32,
     body: Vec<Point>,
+    head: Point,
+    length: u32,
+    shout: String,
+    squad: String,
+    latency: String,
 }
 
 #[cfg(test)]
