@@ -2,21 +2,21 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Debug)]
 pub struct Info {
-    apiversion: String,
-    author: Option<String>,
-    color: Option<String>,
-    head: Option<String>,
-    tail: Option<String>,
-    version: Option<String>
+    pub apiversion: String,
+    pub author: Option<String>,
+    pub color: Option<String>,
+    pub head: Option<String>,
+    pub tail: Option<String>,
+    pub version: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
 pub struct Start {
-    color: String,
+    pub color: String,
     #[serde(rename = "headType")]
-    head_type: HeadType,
+    pub head_type: HeadType,
     #[serde(rename = "tailType")]
-    tail_type: TailType,
+    pub tail_type: TailType,
 }
 
 impl Start {
@@ -157,5 +157,4 @@ mod test {
         };
         assert_eq!(correct_move, deserialized_move);
     }
-
 }

@@ -84,8 +84,6 @@ fn start() {
         )
         .dispatch();
     assert_eq!(response.status(), Status::Ok);
-    // test the response to match the regex
-    let _start: responses::Start = serde_json::from_str(&response.body_string().unwrap()).unwrap();
 }
 
 #[test]

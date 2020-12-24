@@ -19,16 +19,14 @@ use rocket_contrib::json::Json;
 
 #[get("/")]
 fn index() -> Json<responses::Info> {
-    Json(
-        responses::Info {
-            apiversion: "1".to_string(),
-            author: None,
-            color: Some("#b7410e".to_string()),
-            head: None,
-            tail: None,
-            version: Some("0".to_string()),
-        }
-    )
+    Json(responses::Info {
+        apiversion: "1".to_string(),
+        author: None,
+        color: Some("#b7410e".to_string()),
+        head: None,
+        tail: None,
+        version: Some("0".to_string()),
+    })
 }
 
 #[post("/start")]
